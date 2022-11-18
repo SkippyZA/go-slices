@@ -41,7 +41,7 @@ func TestFind(t *testing.T) {
 	assert.Equal(t, 2, result)
 
 	arr = []int{1, 3, 5, 7}
-	result, err = slices.Find(arr, isEven)
+	_, err = slices.Find(arr, isEven)
 	assert.ErrorIs(t, err, slices.ErrNotFound)
 }
 
