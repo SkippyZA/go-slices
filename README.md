@@ -18,24 +18,20 @@ go get github.com/skippyza/go-slices
 Filter even numbers
 ```golang
 slices.Filter([]int{1, 2, 3, 4, 5}, func(i int) bool { return i%2 == 0 })
-
-// Output:
 // [2 4]
 ```
 
 Double all the numbers
 ```golang
-slices.Map([]int{8, 14, 23}, func(i int) int { return i*2 })
-
-// Output:
+double := func(i int) int { return i*2 }
+slices.Map([]int{8, 14, 23}, double)
 // [16 28 46]
 ```
 
 Sum all the numbers in a slice
 ```golang
-slices.Reduce([]int{5, 1, 2, 2}, func(prev, cur int) int { return prev + cur }, 0)
-
-// Output:
+sum := func(a, b int) int { return a+b }
+slices.Reduce([]int{5, 1, 2, 2}, sum, 0)
 // 10
 ```
 
