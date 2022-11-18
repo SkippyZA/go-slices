@@ -1,12 +1,11 @@
 .DEFAULT_GOAL := help
 .PHONY: cov open-cov deps lint test help
 
-TEST_PATTERN?=Test*
 TEST_PARALLEL?=1
 
 ## cov: Run unit tests and generate code coverage
 cov:
-	go test -v -race -p=$(TEST_PARALLEL) -run "$(TEST_PATTERN)" ./... -covermode='atomic' -coverprofile='.cover.out'
+	go test -v -race -p=$(TEST_PARALLEL) ./... -covermode='atomic' -coverprofile='.cover.out'
 
 ## open-cov: Open the code coverage report in your browser
 open-cov:
@@ -22,7 +21,7 @@ lint:
 
 ## test: Run the project unit tests
 test:
-	go test -v -race -p=$(TEST_PARALLEL) -run "$(TEST_PATTERN)" ./...
+	go test -v -race -p=$(TEST_PARALLEL) ./...
 
 ## :
 ## help: Print out available make targets.
