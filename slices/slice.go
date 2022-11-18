@@ -1,15 +1,5 @@
 package slices
 
-import "errors"
-
-var (
-	ErrNotFound = errors.New("item not found")
-)
-
-type PredicateFn[T any] func(T) bool
-type MapFn[T any, U any] func(T) U
-type AccumulatorFn[T any, U any] func(U, T) U
-
 func All[S ~[]T, T any](arr S, fn PredicateFn[T]) bool {
 	for _, el := range arr {
 		if !fn(el) {

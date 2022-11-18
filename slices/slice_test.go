@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/skippyza/go-slices"
+	"github.com/skippyza/go-slices/slices"
 	"github.com/stretchr/testify/assert"
 )
 
