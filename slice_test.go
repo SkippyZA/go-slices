@@ -25,6 +25,20 @@ func TestAll(t *testing.T) {
 	assert.Equal(t, false, result)
 }
 
+func TestAny(t *testing.T) {
+	arr := []int{1, 2, 3, 4}
+	result := slices.Any(arr, isPositive)
+	assert.Equal(t, true, result)
+
+	arr = []int{1, 2, 3, -1}
+	result = slices.Any(arr, isPositive)
+	assert.Equal(t, true, result)
+
+	arr = []int{-1, -2, -3, -4}
+	result = slices.Any(arr, isPositive)
+	assert.Equal(t, false, result)
+}
+
 func TestEach(t *testing.T) {
 	count := 0
 	counter := func(in int) { count++ }
@@ -32,6 +46,12 @@ func TestEach(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
 	slices.Each(arr, counter)
 	assert.Equal(t, 4, count)
+}
+
+func TestFilter(t *testing.T) {
+	arr := []int{1, 2, 3, 4}
+	result := slices.Filter(arr, isEven)
+	assert.Equal(t, []int{2, 4}, result)
 }
 
 func TestFind(t *testing.T) {
@@ -51,28 +71,8 @@ func TestMap(t *testing.T) {
 	assert.Equal(t, []int{2, 4, 6, 8}, result)
 }
 
-func TestFilter(t *testing.T) {
-	arr := []int{1, 2, 3, 4}
-	result := slices.Filter(arr, isEven)
-	assert.Equal(t, []int{2, 4}, result)
-}
-
 func TestReduce(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
 	result := slices.Reduce(arr, appendToString, "")
 	assert.Equal(t, "1234", result)
-}
-
-func TestAny(t *testing.T) {
-	arr := []int{1, 2, 3, 4}
-	result := slices.Any(arr, isPositive)
-	assert.Equal(t, true, result)
-
-	arr = []int{1, 2, 3, -1}
-	result = slices.Any(arr, isPositive)
-	assert.Equal(t, true, result)
-
-	arr = []int{-1, -2, -3, -4}
-	result = slices.Any(arr, isPositive)
-	assert.Equal(t, false, result)
 }

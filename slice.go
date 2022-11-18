@@ -20,6 +20,16 @@ func All[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
 	return true
 }
 
+func Any[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
+	for _, el := range arr {
+		if fn(el) {
+			return true
+		}
+	}
+
+	return false
+}
+
 func Each[S ~[]IN, IN any](arr S, fn func(IN)) {
 	for _, el := range arr {
 		fn(el)
@@ -63,14 +73,4 @@ func Reduce[S ~[]IN, IN any, OUT any](arr S, fn AccumulatorFn[IN, OUT], initial 
 	}
 
 	return initial
-}
-
-func Any[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
-	for _, el := range arr {
-		if fn(el) {
-			return true
-		}
-	}
-
-	return false
 }
