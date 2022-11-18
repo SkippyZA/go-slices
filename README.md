@@ -5,8 +5,7 @@
 
 # go-slices
 
-The goal in mind for this `go-slices` module is to provide basic generics to cover all the common operations a developer
-will typically perform on a slice.
+The goal in mind for this `go-slices` module is to provide basic generics to cover all the common operations a developer will typically perform on a slice.
 
 ## Installation
 
@@ -17,15 +16,27 @@ go get github.com/skippyza/go-slices
 ## Examples
 
 Filter even numbers
-
 ```golang
 slices.Filter([]int{1, 2, 3, 4, 5}, func(i int) bool { return i%2 == 0 })
+
+// Output:
+// [2 4]
 ```
 
 Double all the numbers
-
 ```golang
 slices.Map([]int{8, 14, 23}, func(i int) int { return i*2 })
+
+// Output:
+// [16 28 46]
+```
+
+Sum all the numbers in a slice
+```golang
+slices.Reduce([]int{5, 1, 2, 2}, func(prev, cur int) int { return prev + cur }, 0)
+
+// Output:
+// 10
 ```
 
 ## Usage
