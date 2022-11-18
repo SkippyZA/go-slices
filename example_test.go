@@ -1,0 +1,44 @@
+package slices_test
+
+import (
+	"fmt"
+
+	"github.com/skippyza/go-slices"
+)
+
+func ExampleAll() {
+	isEven := func(i int) bool { return i%2 == 0 }
+
+	result := slices.All([]int{2, 4, 6, 8, 10}, isEven)
+	fmt.Println(result)
+	result = slices.All([]int{1, 2, 4, 6, 8, 9, 10}, isEven)
+	fmt.Println(result)
+
+	// Output:
+	// true
+	// false
+}
+
+func ExampleEach() {
+	printLine := func(s string) { fmt.Println(s) }
+
+	slices.Each([]string{"test 1", "test 2", "test 3"}, printLine)
+
+	// Output:
+	// test 1
+	// test 2
+	// test 3
+}
+
+func ExampleFind() {
+	isEven := func(i int) bool { return i%2 == 0 }
+
+	result, err := slices.Find([]int{1, 3, 4, 6, 7}, isEven)
+	fmt.Println(result, err)
+	result, err = slices.Find([]int{1, 3, 5, 7}, isEven)
+	fmt.Println(result, err)
+
+	// Output:
+	// 4 <nil>
+	// 0 item not found
+}
