@@ -7,10 +7,10 @@ var (
 )
 
 type PredicateFn[T any] func(T) bool
-type MapFn[IN any, OUT any] func(IN) OUT
-type AccumulatorFn[IN any, OUT any] func(OUT, IN) OUT
+type MapFn[T any, U any] func(T) U
+type AccumulatorFn[T any, U any] func(U, T) U
 
-func All[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
+func All[S ~[]T, T any](arr S, fn PredicateFn[T]) bool {
 	for _, el := range arr {
 		if !fn(el) {
 			return false
@@ -20,7 +20,7 @@ func All[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
 	return true
 }
 
-func Any[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
+func Any[S ~[]T, T any](arr S, fn PredicateFn[T]) bool {
 	for _, el := range arr {
 		if fn(el) {
 			return true
@@ -30,13 +30,13 @@ func Any[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) bool {
 	return false
 }
 
-func Each[S ~[]IN, IN any](arr S, fn func(IN)) {
+func Each[S ~[]T, T any](arr S, fn func(T)) {
 	for _, el := range arr {
 		fn(el)
 	}
 }
 
-func Filter[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) S {
+func Filter[S ~[]T, T any](arr S, fn PredicateFn[T]) S {
 	result := make(S, 0, len(arr))
 	for _, el := range arr {
 		if fn(el) {
@@ -47,19 +47,19 @@ func Filter[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) S {
 	return result
 }
 
-func Find[S ~[]IN, IN any](arr S, fn PredicateFn[IN]) (IN, error) {
+func Find[S ~[]T, T any](arr S, fn PredicateFn[T]) (T, error) {
 	for _, el := range arr {
 		if fn(el) {
 			return el, nil
 		}
 	}
 
-	var tmp IN
+	var tmp T
 	return tmp, ErrNotFound
 }
 
-func Map[S ~[]IN, IN any, OUT any](arr S, fn MapFn[IN, OUT]) []OUT {
-	result := make([]OUT, 0, len(arr))
+func Map[S ~[]T, T any, U any](arr S, fn MapFn[T, U]) []U {
+	result := make([]U, 0, len(arr))
 	for _, el := range arr {
 		result = append(result, fn(el))
 	}
@@ -67,7 +67,7 @@ func Map[S ~[]IN, IN any, OUT any](arr S, fn MapFn[IN, OUT]) []OUT {
 	return result
 }
 
-func Reduce[S ~[]IN, IN any, OUT any](arr S, fn AccumulatorFn[IN, OUT], initial OUT) OUT {
+func Reduce[S ~[]T, T any, U any](arr S, fn AccumulatorFn[T, U], initial U) U {
 	for _, el := range arr {
 		initial = fn(initial, el)
 	}
