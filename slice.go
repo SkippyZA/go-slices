@@ -1,4 +1,4 @@
-package slices
+package goslices
 
 func All[S ~[]T, T any](arr S, fn PredicateFn[T]) bool {
 	for _, el := range arr {

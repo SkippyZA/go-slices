@@ -1,10 +1,10 @@
-package slices_test
+package goslices_test
 
 import (
 	"strconv"
 	"testing"
 
-	"github.com/skippyza/go-slices/slices"
+	goslices "github.com/skippyza/go-slices"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,25 +17,25 @@ var (
 
 func TestAll(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	result := slices.All(arr, isPositive)
+	result := goslices.All(arr, isPositive)
 	assert.Equal(t, true, result)
 
 	arr = []int{1, 2, 3, -1}
-	result = slices.All(arr, isPositive)
+	result = goslices.All(arr, isPositive)
 	assert.Equal(t, false, result)
 }
 
 func TestAny(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	result := slices.Any(arr, isPositive)
+	result := goslices.Any(arr, isPositive)
 	assert.Equal(t, true, result)
 
 	arr = []int{1, 2, 3, -1}
-	result = slices.Any(arr, isPositive)
+	result = goslices.Any(arr, isPositive)
 	assert.Equal(t, true, result)
 
 	arr = []int{-1, -2, -3, -4}
-	result = slices.Any(arr, isPositive)
+	result = goslices.Any(arr, isPositive)
 	assert.Equal(t, false, result)
 }
 
@@ -44,35 +44,35 @@ func TestEach(t *testing.T) {
 	counter := func(in int) { count++ }
 
 	arr := []int{1, 2, 3, 4}
-	slices.Each(arr, counter)
+	goslices.Each(arr, counter)
 	assert.Equal(t, 4, count)
 }
 
 func TestFilter(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	result := slices.Filter(arr, isEven)
+	result := goslices.Filter(arr, isEven)
 	assert.Equal(t, []int{2, 4}, result)
 }
 
 func TestFind(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	result, err := slices.Find(arr, isEven)
+	result, err := goslices.Find(arr, isEven)
 	assert.NoError(t, err)
 	assert.Equal(t, 2, result)
 
 	arr = []int{1, 3, 5, 7}
-	_, err = slices.Find(arr, isEven)
-	assert.ErrorIs(t, err, slices.ErrNotFound)
+	_, err = goslices.Find(arr, isEven)
+	assert.ErrorIs(t, err, goslices.ErrNotFound)
 }
 
 func TestMap(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	result := slices.Map(arr, doubleFn)
+	result := goslices.Map(arr, doubleFn)
 	assert.Equal(t, []int{2, 4, 6, 8}, result)
 }
 
 func TestReduce(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	result := slices.Reduce(arr, appendToString, "")
+	result := goslices.Reduce(arr, appendToString, "")
 	assert.Equal(t, "1234", result)
 }

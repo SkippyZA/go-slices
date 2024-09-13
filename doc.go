@@ -1,6 +1,2 @@
-// go-slices provides generic functions to common collection operations
+// go-slices provides generic functions for working with slices
 package goslices
-
-import (
-	_ "github.com/skippyza/go-slices/slices"
-)
